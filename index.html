@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<!-- This tells the browser: "this is a modern HTML5 webpage" -->
+<html lang="en">
+
+<head>
+  <!-- HEAD = stuff the browser needs but doesn't show on page -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shivam Kashyap — Product Manager</title>
+
+  <!-- Google Fonts: Inter for body text, Syne for headings -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* ===== RESET: removes default browser spacing on everything ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ===== BASE: font, background, text color for entire page ===== */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f7;  /* warm off-white */
+      color: #1a1a1a;
+      line-height: 1.7;
+    }
+
+    /* ===== NAV BAR: sticks to top when you scroll ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #f9f9f7;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between; /* name left, links right */
+      align-items: center;
+      z-index: 100;
+    }
+
+    /* Your name in nav */
+    .nav-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+
+    /* Nav links list */
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    /* Each nav link */
+    .nav-links a {
+      text-decoration: none;
+      color: #666;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #1a1a1a; }
+
+    /* ===== CONTAINER: centers content, limits max width ===== */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HERO: top section with name + tagline ===== */
+    .hero {
+      padding: 80px 0 64px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    /* Small label above name */
+    .hero-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #999;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    /* Big name heading */
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 6vw, 54px); /* scales with screen */
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    /* Italic styled word in heading */
+    .hero h1 em {
+      font-style: italic;
+      color: #666;
+    }
+
+    /* Intro paragraph */
+    .hero-description {
+      font-size: 16px;
+      color: #555;
+      max-width: 580px;
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+
+    /* Row of CTA buttons */
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Filled button */
+    .btn-primary {
+      background: #1a1a1a;
+      color: #f9f9f7;
+      padding: 11px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #333; }
+
+    /* Outlined button */
+    .btn-secondary {
+      background: transparent;
+      color: #1a1a1a;
+      padding: 11px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1.5px solid #ccc;
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: #1a1a1a; }
+
+    /* ===== SECTIONS: each content block ===== */
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    /* ALL CAPS small label above each section */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #bbb;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    /* ===== EXPERIENCE ===== */
+
+    /* Stack all job entries vertically */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 52px;
+    }
+
+    /* Each job: date column + content column side by side */
+    .experience-item {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 28px;
+    }
+
+    /* Left column: date + company */
+    .experience-date {
+      font-size: 12px;
+      color: #aaa;
+      font-weight: 500;
+      padding-top: 4px;
+      line-height: 1.5;
+    }
+
+    .experience-company {
+      font-size: 11px;
+      color: #ccc;
+      margin-top: 5px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right column */
+    .experience-role {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    /* Italic context line below role title */
+    .experience-context {
+      font-size: 13px;
+      color: #999;
+      font-style: italic;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    /* Sub-section headers inside a role (e.g. "AI Automation") */
+    .experience-subsection {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: 0.3px;
+      margin-top: 18px;
+      margin-bottom: 10px;
+    }
+
+    /* First subsection needs no top margin */
+    .experience-subsection:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Bullet point list */
+    .experience-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    /* Each bullet */
+    .experience-bullets li {
+      font-size: 13.5px;
+      color: #444;
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    /* The dash "—" before each bullet */
+    .experience-bullets li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: #ddd;
+      font-size: 11px;
+      top: 5px;
+    }
+
+    /* Bold text inside bullets (metrics and key results) */
+    .experience-bullets li strong {
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+
+    /* Italic text inside bullets */
+    .experience-bullets li em {
+      color: #555;
+    }
+
+    /* ===== SKILLS ===== */
+
+    /* Two-column grid */
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Each category row */
+    .skill-group {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* Category label */
+    .skill-group-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1a1a1a;
+      padding-top: 5px;
+    }
+
+    /* Skill tags container */
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    /* Individual skill pill */
+    .skill-tag {
+      background: #efefed;
+      color: #555;
+      font-size: 12px;
+      padding: 4px 11px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* ===== PROOF OF WORK (PROJECT CARDS) ===== */
+
+    /* 2-column grid of cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Each card */
+    .project-card {
+      background: #fff;
+      border: 1px solid #e8e8e6;
+      border-radius: 10px;
+      padding: 26px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .project-card:hover {
+      border-color: #aaa;
+      transform: translateY(-2px); /* slight lift */
+    }
+
+    /* Emoji at top of card */
+    .project-icon {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    /* Card title */
+    .project-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1a1a1a;
+    }
+
+    /* Card description */
+    .project-card p {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    /* Metric tag at bottom of card */
+    .project-metric {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #1a1a1a;
+      background: #f0f0ee;
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* ===== EDUCATION ===== */
+    .education-item {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 28px;
+    }
+
+    .education-year {
+      font-size: 12px;
+      color: #aaa;
+      padding-top: 4px;
+    }
+
+    .education-degree {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .education-school {
+      font-size: 13px;
+      color: #888;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-section {
+      padding: 64px 0 80px;
+    }
+
+    .contact-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .contact-section p {
+      font-size: 15px;
+      color: #777;
+      margin-bottom: 32px;
+      max-width: 460px;
+    }
+
+    /* Row of contact links */
+    .contact-links {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      font-size: 14px;
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1.5px solid #ddd;
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .contact-links a:hover { border-color: #1a1a1a; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #ccc;
+      padding: 24px;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    /* Only applies on screens under 620px wide (phones) */
+    @media (max-width: 620px) {
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 18px; }
+
+      /* Stack 2-column layouts to 1 column on mobile */
+      .experience-item,
+      .education-item,
+      .skill-group { grid-template-columns: 1fr; gap: 6px; }
+
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav>
+    <a href="#" class="nav-name">Shivam Kashyap</a>
+    <ul class="nav-links">
+      <li><a href="#experience">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#proof">Proof of Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <div class="container">
+    <div class="hero">
+      <p class="hero-label">Product Manager · Bangalore, India</p>
+
+      <h1>Building AI products<br>that drive <em>real outcomes.</em></h1>
+
+      <!-- This is pulled directly from your Professional Summary -->
+      <p class="hero-description">
+        PM with 4+ years building AI-led automation and growth products at scale.
+        Shipped agent-first systems that replaced manual operations end-to-end across
+        onboarding and verification. Track record of moving revenue, conversion, and
+        engagement metrics with measurable outcomes.
+      </p>
+
+      <div class="hero-cta">
+        <a href="https://www.linkedin.com/in/shivam-kashyap72766/" target="_blank" class="btn-primary">LinkedIn →</a>
+        <a href="mailto:sk72766@gmail.com" class="btn-secondary">Get in touch</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Experience</p>
+
+      <div class="experience-list">
+
+        <!-- ======== JUSTDIAL ======== -->
+        <div class="experience-item">
+
+          <!-- Left: date + company -->
+          <div>
+            <p class="experience-date">Dec 2022 — Present</p>
+            <p class="experience-company">JUSTDIAL</p>
+          </div>
+
+          <!-- Right: content -->
+          <div>
+            <p class="experience-role">Product Manager</p>
+            <p class="experience-context">Own AI automation, revenue growth, and communication infrastructure for JustDial's paid SME client base; currently leading a 4-member product pod across communication and revenue initiatives.</p>
+
+            <!-- Sub-section: AI Automation -->
+            <p class="experience-subsection">AI Automation</p>
+            <ul class="experience-bullets">
+              <li>Own three <strong>0→1 AI agent programs</strong> (WhatsApp Appointments, AI Onboarding, AI Catalogue) end to end, from solution design to GTM to engagement and traction; every bot is linguistic-first, running across <strong>major Indian languages.</strong></li>
+              <li>Launched a new <em>WhatsApp AI agent appointment source</em> enabling end-to-end booking at <strong>₹25 per appointment</strong> vs ₹2,300 via telecalling, with a <strong>7.3% conversion rate.</strong></li>
+              <li>Rebuilt onboarding using <em>WhatsApp + voice bots with human-in-the-loop escalation</em>, cutting team size from <strong>40 to 4</strong> and blended cost per onboarding from <strong>₹40 to ₹2.</strong></li>
+              <li>Shipped <strong>0→1 AI catalogue generation</strong> via a <em>WhatsApp chatbot collecting images and PDFs</em>, creating digital catalogues for <strong>37% of clients</strong> with none previously.</li>
+              <li>Created a <em>CSAT-to-sales appointment funnel</em> using voice bot + WhatsApp chatbot, booking new sales appointments at <strong>₹73 per appointment</strong> with <strong>4.7% conversion.</strong></li>
+            </ul>
+
+            <!-- Sub-section: Revenue -->
+            <p class="experience-subsection">Revenue</p>
+            <ul class="experience-bullets">
+              <li>Grew monthly revenue from <strong>₹1.43 Cr to ₹2.12 Cr</strong> by owning revenue funnels across <strong>5 sales sources</strong>, defining lead intent to track conversion end to end.</li>
+              <li>Shipped an <em>automated upselling engine triggered by customer satisfaction and recency signals</em>, generating <strong>₹45L/month</strong> in incremental revenue with zero manual intervention post-launch.</li>
+              <li>Revamped bounced EMI recovery workflows using <em>frequency optimization, personalization, and multi-channel outreach</em>, scaling monthly collections from <strong>₹70L to ₹1.3 Cr.</strong></li>
+            </ul>
+
+            <!-- Sub-section: Communication -->
+            <p class="experience-subsection">Communication Strategy</p>
+            <ul class="experience-bullets">
+              <li>Built and scaled the <em>internal CPaaS platform</em> (SMS, Email, Push, WhatsApp) handling <strong>10 Cr+ daily requests</strong>, owning growth across engagement, content and lead enrichment, DAU, app installs, and KYC.</li>
+              <li>Built an <em>AI communication engine</em> that selects language, channel, and send time per user with persona-based lifecycle triggers, increasing engagement by <strong>22%</strong> while reducing communication costs by <strong>9%.</strong></li>
+              <li>Launched a <strong>0→1 WhatsApp KYC chatbot</strong> using OCR + OTP verification, improving completion from <strong>70% to 92%</strong> and cutting cost per verification from <strong>₹147 to ₹23.</strong></li>
+              <li>Launched a QR-based rating system with <strong>4L+ downloads</strong> contributing <strong>12% of daily platform ratings</strong>; shipped rich push notifications driving an <strong>11% uplift in DAU.</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ======== CURELINK ======== -->
+        <div class="experience-item">
+          <div>
+            <p class="experience-date">May 2022 — Nov 2022</p>
+            <p class="experience-company">CURELINK</p>
+          </div>
+          <div>
+            <p class="experience-role">Assistant Product Manager</p>
+            <p class="experience-context">Early-stage health-tech platform driving doctor engagement and patient-to-program conversion.</p>
+            <ul class="experience-bullets">
+              <li>Shipped a <em>sales disposition MVP that structured follow-up logic and tightened conversion loops</em>, improving lead conversion by <strong>23%.</strong></li>
+              <li>Grew doctor engagement by <strong>37%</strong> by designing <em>behavioral nudges tied to on-site activation signals.</em></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Areas of Expertise</p>
+
+      <div class="skills-grid">
+
+        <!-- Row 1: AI & Automation -->
+        <div class="skill-group">
+          <p class="skill-group-label">AI & Automation</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Agent-first Workflows</span>
+            <span class="skill-tag">WhatsApp Business API</span>
+            <span class="skill-tag">Voice Bots</span>
+            <span class="skill-tag">OCR/OTP Systems</span>
+            <span class="skill-tag">Agentic Products</span>
+            <span class="skill-tag">Claude Code</span>
+            <span class="skill-tag">Antigravity</span>
+          </div>
+        </div>
+
+        <!-- Row 2: Growth & Monetization -->
+        <div class="skill-group">
+          <p class="skill-group-label">Growth & Monetization</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Funnel Optimization</span>
+            <span class="skill-tag">Upselling Engines</span>
+            <span class="skill-tag">EMI Recovery</span>
+            <span class="skill-tag">Lead Prioritization</span>
+            <span class="skill-tag">Revenue Analytics</span>
+            <span class="skill-tag">A/B Testing</span>
+            <span class="skill-tag">Pricing Experiments</span>
+          </div>
+        </div>
+
+        <!-- Row 3: Communication & Data Platform -->
+        <div class="skill-group">
+          <p class="skill-group-label">Communication & Data</p>
+          <div class="skill-tags">
+            <span class="skill-tag">CPaaS Infrastructure</span>
+            <span class="skill-tag">AI Communication Engine</span>
+            <span class="skill-tag">Lifecycle Triggers</span>
+            <span class="skill-tag">APIs</span>
+            <span class="skill-tag">No-code Prototyping</span>
+            <span class="skill-tag">Cohort Analysis</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">Mixpanel</span>
+            <span class="skill-tag">CleverTap</span>
+            <span class="skill-tag">Firebase</span>
+            <span class="skill-tag">Jira</span>
+            <span class="skill-tag">Figma</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROOF OF WORK ===================== -->
+  <section id="proof">
+    <div class="container">
+      <p class="section-label">Proof of Work</p>
+
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-icon">🤖</div>
+          <h3>WhatsApp AI Appointment Agent</h3>
+          <p>Replaced a 40-person telecalling team with an end-to-end AI agent. Handles booking, follow-ups, and confirmation fully autonomously across Indian languages.</p>
+          <span class="project-metric">₹2,300 → ₹25/appt · 7.3% CVR</span>
+        </div>
+
+        <div class="project-card">
+          <div class="project-icon">📦</div>
+          <h3>AI Catalogue Generation</h3>
+          <p>0→1 WhatsApp chatbot that collects product images and PDFs from SME clients and auto-generates digital catalogues — no manual data entry needed.</p>
+          <span class="project-metric">37% of zero-catalogue clients activated</span>
+        </div>
+
+        <div class="project-card">
+          <div class="project-icon">📡</div>
+          <h3>AI Communication Engine (CPaaS)</h3>
+          <p>Internal platform that dynamically selects language, channel, and send timing per user. Handles all communication across SMS, Email, Push & WhatsApp.</p>
+          <span class="project-metric">10 Cr+ daily · Engagement +22%</span>
+        </div>
+
+        <div class="project-card">
+          <div class="project-icon">💰</div>
+          <h3>EMI Recovery Automation</h3>
+          <p>Rebuilt bounced EMI recovery with cohort-based frequency optimization, personalization, and multi-channel outreach across WhatsApp, SMS & Push.</p>
+          <span class="project-metric">₹70L → ₹1.3 Cr/month</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EDUCATION ===================== -->
+  <section id="education">
+    <div class="container">
+      <p class="section-label">Education</p>
+
+      <div class="education-item">
+        <div>
+          <p class="education-year">2017 — 2022</p>
+        </div>
+        <div>
+          <p class="education-degree">M.Sc. (Hons.) Economics + B.E. (Hons.) Mechanical Engineering</p>
+          <p class="education-school">BITS Pilani — Goa Campus</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <div class="contact-section" id="contact">
+    <div class="container">
+      <h2>Let's connect.</h2>
+      <p>Open to PM roles, consulting conversations, or a good chat about AI products and growth.</p>
+      <div class="contact-links">
+        <a href="mailto:sk72766@gmail.com">sk72766@gmail.com</a>
+        <a href="https://www.linkedin.com/in/shivam-kashyap72766/" target="_blank">LinkedIn</a>
+        <a href="tel:+919128326365">+91-9128326365</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    Shivam Kashyap · <a href="https://sk72766.github.io" style="color:#ccc;">sk72766.github.io</a> · 2025
+  </footer>
+
+</body>
+</html>
